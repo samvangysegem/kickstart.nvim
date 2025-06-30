@@ -246,8 +246,25 @@ rtp:prepend(lazypath)
 --
 -- NOTE: Here is where you install your plugins.
 require('lazy').setup({
+  -- Always expand tabs to spaces, width determined automatically
+  {
+    'NMAC427/guess-indent.nvim', -- Detect tabstop and shiftwidth automatically
+    opts = {
+      on_tab_options = { -- A table of vim options when tabs are detected 
+        ["expandtab"] = true,
+        ["tabstop"] = 2, -- If the option value is 'detected', The value is set to the automatically detected indent size.
+        ["softtabstop"] = 2,
+        ["shiftwidth"] = 2,
+      },
+      on_space_options = { -- A table of vim options when spaces are detected 
+        ["expandtab"] = true,
+        ["tabstop"] = "detected", -- If the option value is 'detected', The value is set to the automatically detected indent size.
+        ["softtabstop"] = "detected",
+        ["shiftwidth"] = "detected",
+      },
+    },
+  },
   -- NOTE: Plugins can be added with a link (or for a github repo: 'owner/repo' link).
-  'NMAC427/guess-indent.nvim', -- Detect tabstop and shiftwidth automatically
 
   -- NOTE: Plugins can also be added by using a table,
   -- with the first argument being the link and the following

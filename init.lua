@@ -716,7 +716,7 @@ require('lazy').setup({
             '--header-insertion=iwyu',
             '--completion-style=detailed',
             '--function-arg-placeholders',
-            '--fallback-style=llvm',
+            '--fallback-style=Google',
           },
           init_options = {
             usePlaceholders = true,
@@ -814,6 +814,7 @@ require('lazy').setup({
       },
     },
     opts = {
+      -- log_level = vim.log.levels.DEBUG,
       notify_on_error = true,
       -- format_on_save = function(bufnr)
       --   -- Disable "format_on_save lsp_fallback" for languages that don't
@@ -833,11 +834,18 @@ require('lazy').setup({
       formatters_by_ft = {
         lua = { 'stylua' },
         python = { 'black' },
+        c = { 'clang-format' },
+        cpp = { 'clang-format' },
         --
         -- You can use 'stop_after_first' to run the first available formatter from the list
         -- javascript = { "prettierd", "prettier", stop_after_first = true },
       },
       formatters = {
+        ['clang-format'] = {
+          prepend_args = {
+            '-style={BasedOnStyle: Google, ColumnLimit: 100}',
+          },
+        },
         black = {
           command = 'python3',
           args = {
